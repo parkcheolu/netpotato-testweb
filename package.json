@@ -1,0 +1,19 @@
+{
+  "name": "testweb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-html-render": "^1.0.3",
+    "koa-router": "^9.4.0",
+    "koa-send": "^5.0.1",
+    "koa-static": "^5.0.0"
+  },
+  "nodemonConfig": {
+    "ext": "html js"
+  },
+  "scripts": {
+    "start:dev": "nodemon src"
+  }
+}

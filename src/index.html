@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+<title>WebSocket Client Test</title>
+<!--
+<script src="/js/socket.io.js"></script>
+<script>
+const socket = io('http://localhost:9999/ws', {
+    path: '/ws'
+});
+</script>
+-->
+</head>
+<body>
+    <p>WebSocket Client</p>
+    <div style="display:flex; flex-direction: column;">
+        <div id="action-area" style="display: flex;">
+            <input type="text" id="messageText" />
+            <button id="send-message"><span>Send</span></button>
+        </div>
+        <div id="reaction-area">
+            <div id="received-message-box"></div>
+        </div>
+    </div>
+</body>
+<script>
+let socket = new WebSocket("ws://localhost:9999/ws");
+socket.onopen = () => {
+    console.log('WebSocket connection established');
+}
+socket.onclose = () => {
+    console.log('WebSocket connection closed');
+}
+socket.onmessage = (e) => {
+    console.log(`on message: `);
+    console.dir(e);
+    appendMessageReceived(e.data);
+}
+document.getElementById('send-message').addEventListener('click', (e) => {
+    socket.send(document.getElementById('messageText').value);
+});
+
+function appendMessageReceived(text) {
+    const box = document.getElementById('received-message-box');
+    const message = document.createElement('span');
+    message.innerHTML = text;
+    box.appendChild(message);
+    box.appendChild(document.createElement('br'));
+}
+
+</script>
